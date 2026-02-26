@@ -1,0 +1,32 @@
+services:
+  kaimon-edge:
+    image: polylvst/kaimon-edge-anshar:latest
+    container_name: kaimon-edge-anshar
+    ports:
+      - "8000:8000"
+    environment:
+      - FACE_THRESHOLD=0.60
+      # Default 0.6 for ArcFace, lower to make recognition more strict
+      # Changing threshold does not require refreshing embeddings
+      - FACE_MODEL_NAME=ArcFace
+      - FACE_BACKEND_NAME=opencv
+      - FACE_DISTANCE_METRIC=cosine
+      - EDGE_DEVICE_ID=${EDGE_DEVICE_ID:-edge-1}
+      - MAIN_HUB_URL=${MAIN_HUB_URL:-}
+      - SYNC_INTERVAL_SECONDS=${SYNC_INTERVAL_SECONDS:-30}
+      - HUB_SYNC_INTERVAL_SECONDS=${HUB_SYNC_INTERVAL_SECONDS:-30}
+    restart: unless-stopped
+    volumes:
+      - ./data/db:/app/db
+      - ./data/.deepface:/root/.deepface
+
+  kaimon-edge-fe:
+    image: polylvst/kaimon-edge-fe-anshar:latest
+    container_name: kaimon-edge-fe-anshar
+    ports:
+      - "3000:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - kaimon-edge
+    restart: unless-stopped
