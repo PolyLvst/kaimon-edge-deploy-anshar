@@ -1,5 +1,5 @@
 services:
-  kaimon-edge:
+  kaimon-edge-anshar:
     image: polylvst/kaimon-edge-anshar:latest
     container_name: kaimon-edge-anshar
     ports:
@@ -20,7 +20,7 @@ services:
       - ./data/db:/app/db
       - ./data/.deepface:/root/.deepface
 
-  kaimon-edge-fe:
+  kaimon-edge-fe-anshar:
     image: polylvst/kaimon-edge-fe-anshar:latest
     container_name: kaimon-edge-fe-anshar
     ports:
@@ -28,5 +28,5 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
-      - kaimon-edge
+      - kaimon-edge-anshar
     restart: unless-stopped
