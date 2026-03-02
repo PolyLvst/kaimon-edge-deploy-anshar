@@ -6,6 +6,13 @@ set -euo pipefail
 FRONTEND_URL="http://localhost:3000"
 TIMEOUT=60
 
+# --- Wait for network ---
+echo "Waiting for network..."
+for i in $(seq 1 15); do
+    ping -c1 -W2 8.8.8.8 &>/dev/null && break
+    sleep 2
+done
+
 # --- Start services ---
 echo "Pulling latest images..."
 docker compose pull || echo "WARNING: Pull failed (offline?), using local images."
