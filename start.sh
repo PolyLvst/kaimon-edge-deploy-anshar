@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# cd to script's own directory so docker compose finds compose.yaml
+cd "$(dirname "$(readlink -f "$0")")"
+
+export DISPLAY=:0
+
 # Start the Docker Compose stack and launch Chrome in kiosk mode
 
 FRONTEND_URL="http://localhost:3000"
