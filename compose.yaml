@@ -5,9 +5,17 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - FACE_THRESHOLD=0.60
+      - FACE_THRESHOLD=${FACE_THRESHOLD:-0.60}
       # Default 0.6 for ArcFace, lower to make recognition more strict
       # Changing threshold does not require refreshing embeddings
+      # Refuse to answer when rank 1 and rank 2 are this close. 0 disables the
+      # check, which is exactly the old threshold-only behaviour. Needs at least
+      # 2 enrollment photos per student to be safe - see FACE_FINDINGS_2026-08-13.md
+      - FACE_MARGIN=${FACE_MARGIN:-0}
+      - FACE_MARGIN_MODE=${FACE_MARGIN_MODE:-absolute}
+      - FACE_TOPK=${FACE_TOPK:-5}
+      # Model and detector are NOT wired to .env on purpose: changing either
+      # invalidates every stored embedding and requires re-enrolling everyone.
       - FACE_MODEL_NAME=ArcFace
       - FACE_BACKEND_NAME=mtcnn
       - FACE_DISTANCE_METRIC=cosine
