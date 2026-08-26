@@ -39,6 +39,9 @@ services:
       - IDLE_VIDEO_URL=${IDLE_VIDEO_URL:-}
       - IDLE_VIDEO_DELAY_SECONDS=${IDLE_VIDEO_DELAY_SECONDS:-30}
       - IDLE_VIDEO_MUTED=${IDLE_VIDEO_MUTED:-true}
+      # Show the matcher's reason/d1/d2/margin on the result card. Off for daily
+      # use; on while tuning FACE_THRESHOLD or FACE_MARGIN.
+      - DEBUG_MATCH_DETAILS=${DEBUG_MATCH_DETAILS:-false}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
