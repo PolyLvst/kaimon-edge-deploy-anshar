@@ -48,6 +48,8 @@ services:
       # Show the matcher's reason/d1/d2/margin on the result card. Off for daily
       # use; on while tuning FACE_THRESHOLD or FACE_MARGIN.
       - DEBUG_MATCH_DETAILS=${DEBUG_MATCH_DETAILS:-false}
+      # Set true if turning left selects the right-hand name on this kiosk's camera.
+      - HEAD_PICK_CAMERA_MIRRORED=${HEAD_PICK_CAMERA_MIRRORED:-false}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:

@@ -26,6 +26,7 @@ See `.env.example` for available environment variables:
 | `IDLE_VIDEO_URL` | _(empty)_ | Video, playlist or channel link to play |
 | `IDLE_VIDEO_DELAY_SECONDS` | `30` | Seconds without a face before the video takes over |
 | `IDLE_VIDEO_MUTED` | `true` | Start playback muted |
+| `HEAD_PICK_CAMERA_MIRRORED` | `false` | Set `true` if turning left selects the right-hand name on this kiosk's camera |
 
 ## Idle Attract Video
 
