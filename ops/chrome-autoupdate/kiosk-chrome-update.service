@@ -1,0 +1,13 @@
+[Unit]
+Description=Upgrade Google Chrome only (system updates stay off)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+# Only the Chrome package is touched. The running kiosk Chrome keeps the old
+# version until the next reboot, so this never interrupts check-ins.
+ExecStart=/usr/bin/dnf -y -q upgrade --refresh google-chrome-stable
+TimeoutStartSec=30min
+Nice=10
+IOSchedulingClass=idle

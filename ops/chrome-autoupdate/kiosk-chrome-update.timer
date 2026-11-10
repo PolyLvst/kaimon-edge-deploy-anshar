@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily Google Chrome upgrade for the kiosk
+
+[Timer]
+# 03:00 daily; if the kiosk was off then, Persistent runs it soon after the next boot.
+OnCalendar=*-*-* 03:00:00
+Persistent=true
+RandomizedDelaySec=10min
+
+[Install]
+WantedBy=timers.target
